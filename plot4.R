@@ -1,0 +1,13 @@
+#setwd("/home/shailja/courses/exploratory data analysis/ExData_Plotting1")
+data <- read.table("./Data/household_power_consumption.txt", header=TRUE, sep=";", stringsAsFactors=FALSE, dec=".")
+subset <- data[data$Date %in% c("1/2/2007","2/2/2007") ,]
+png("plot4.png", width=480, height=480)
+subset$DateTime <- strptime(paste(subset$Date, subset$Time), "%d/%m/%Y %H:%M:%S")
+par(mfrow=c(2,2))
+plot(subset$DateTime,subset$Global_active_power,xlab="",ylab="Gloabl Active Power",type="l")
+plot(subset$DateTime, subset$Voltage, type="l", xlab="", ylab="Voltage")
+plot(subset$DateTime,subset$Sub_metering_1,type="l",col="black",xlab="",ylab="Energy Submetering")
+lines(subset$DateTime,subset$Sub_metering_2,type="l",col="red")
+lines(subset$DateTime,subset$Sub_metering_3,type="l",col="blue")
+plot(subset$DateTime,subset$Global_reactive_power,xlab="",ylab="Gloabl Reactive Power",type="l")
+dev.off()
